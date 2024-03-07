@@ -1,25 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
+import HomePage from "./pages/homePage/HomePage";
+import BookPage from "./pages/bookPage/BookPage";
+import ROUTES from "./constants/routes";
+import { Provider as StoreProvider } from "react-redux";
+import { store } from './store';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StoreProvider store={store}>
+      <Router>
+        <Routes>
+          <Route path={`${ROUTES.BOOK}/:id`} element={<BookPage />} />
+          <Route path={ROUTES.HOME} element={<HomePage />} />
+        </Routes>
+      </Router >
+
+    </StoreProvider>
   );
 }
 
